@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            sign up
+        </title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            body{
+                width: 100%;
+                height: 100vh;
+                margin: 0;
+                display: flex;
+                align-items: center;
+                justify-content: right;
+                background-image: url(signup.png);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                background-position: center;
+            }
+            .mail{
+                position: relative;
+                top: 25vh;
+                right: 33vh;
+                bottom: -100px;
+            }
+            form{
+                width: 430px;
+                height: 890px;
+                gap: 10px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                background:transparent;
+                position: relative;
+                border-radius: 10px;
+                box-shadow: 0 0 40px black;
+                backdrop-filter: blur(5px);
+                cursor: pointer;
+            }
+            H2{
+                text-align: center;
+                font-size: 8vh;
+            }
+            label{
+                font-size: 19px;
+                cursor: pointer;
+            }
+            input{
+                padding: 20px;
+                border: none;
+                font-size: 17px;
+                margin-top: -9px;
+                margin-bottom: 10px;
+                background:transparent;
+                border: solid 1px #B78F6B;
+                border-radius: 10px;
+                color: white;
+                cursor: pointer;
+            }
+            ::placeholder{
+                font-size: 17px;
+                color: #818283;
+            }
+            p{
+                text-align: center;
+                font-size: 17px;
+                color: aliceblue;
+            }
+            .submit{
+                padding: 15px;
+                font-size: 17px;
+                font-weight: 600;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: all 0.5s ease;
+            }
+            .submit:active{
+                transform: scale(0.9);
+            }
+            span{
+                font-size: 20px;
+                color: #11a0ff;
+                transition: all 2s ease;
+            }
+            span:active{
+                transform: scale(0.5);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="mail">
+            <form id="signupForm">
+                <h2>Signup Here</h2>
+                <label for="name" >Your Name: </label>
+                <input type="text" id="firstName" placeholder="First Name" required>
+                <label for="name">Last Name:</label>
+                <input type="text" id="lastName" placeholder="Last Name" required>
+                <label for="date of birth">Date Of Birth:</label>
+                <input type="date" id="dob" placeholder="Date of Birth" required>
+                <label for="Phone"> Your Phonr Number:</label>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <label for="email">Enter Your Email:</label>
+                <input type="email" id="email" placeholder="Email" required>
+                <label for="Password">Create your Password:</label>
+                <input type="password" id="password" placeholder="New Password" required>
+                <label for="Password">Conform Your Password:</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <p>alredy have account <a href="login.html" ><span>Login</span></a></p>
+                <button type="submit" onclick="goToSignup()" class="submit" >submit</button>
+                <p id="errorMsg" class="error"></p>
+            </form>
+        </div>
+        <script>
+            document.getElementById("signupForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                const firstName = document.getElementById("firstName").value.trim();
+                const lastName = document.getElementById("lastName").value.trim();
+                const dob = document.getElementById("dob").value;
+                const phone = document.getElementById("phone").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const password = document.getElementById("password").value;
+                const confirmPassword = document.getElementById("confirmPassword").value;
+                const errorMsg = document.getElementById("errorMsg");
+
+                // Basic validation
+                if (!firstName || !lastName || !dob || !phone || !email || !password || !confirmPassword) {
+                errorMsg.textContent = "Please fill in all fields.";
+                return;
+                }
+
+                if (!/^\d{10}$/.test(phone)) {
+                errorMsg.textContent = "Phone number must be 10 digits.";
+                return;
+                }
+
+                if (password.length < 6) {
+                errorMsg.textContent = "Password must be at least 6 characters.";
+                return;
+                }
+
+                if (password !== confirmPassword) {
+                errorMsg.textContent = "Passwords do not match.";
+                return;
+                
+                }
+                errorMsg.className = 'success';
+                errorMsg.textContent = "Signup successful!";
+                setTimeout(() => {
+                    window.location.href = "home.html";
+                }, 1500)
+                 {
+                errorMsg.className = 'error';
+                errorMsg.textContent = "Invalid username or password.";
+                }
+            });
+        </script>
+    </body>
+</html>
